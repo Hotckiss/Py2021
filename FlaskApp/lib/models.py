@@ -33,7 +33,7 @@ class TolokaProject:
 
     @staticmethod
     def from_json(json_dict):
-        TolokaProject(json_dict['id'], json_dict['public_name'])
+        return TolokaProject(json_dict['id'], json_dict['public_name'])
 
 
 class TolokaPool:
@@ -41,10 +41,14 @@ class TolokaPool:
     project_id: str
     status: str
 
-    def __init__(self, json_dict):
-        self.id = json_dict['id']
-        self.project_id = json_dict['project_id']
-        self.status = PoolStatus['status']
+    def __init__(self, id, project_id, status):
+        self.id = id
+        self.project_id = project_id
+        self.status = status
+
+    @staticmethod
+    def from_json(json_dict):
+        return TolokaPool(json_dict['id'], json_dict['project_id'], PoolStatus[json_dict['status']])
 
 
 class PoolStatus(Enum):

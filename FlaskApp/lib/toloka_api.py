@@ -20,7 +20,7 @@ def parse_projects(projects):
 
 
 def parse_pools(pools):
-    return [TolokaPool(pools_json) for pools_json in pools]
+    return [TolokaPool.from_json(pools_json) for pools_json in pools]
 
 
 def list_projects():

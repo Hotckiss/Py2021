@@ -5,47 +5,10 @@ from flask import Flask
 from flask_pydantic import validate
 from pydantic import BaseModel
 
+from lib.models import Track, TrackResponse, TrackInfoResponse
+from lib.storage import storage
+
 app = Flask(__name__)
-
-
-class Track(BaseModel):
-    name: str
-    max_parallel_pools: int
-    min_pool_acceptance_rate: float
-    max_hourly_appeals: int
-    check_interval_minutes: int
-    soft_alert_multiplier: float
-
-
-class TrackResponse(BaseModel):
-    id: str
-    message: str
-
-
-class TrackInfoResponse(BaseModel):
-    track_id: str
-    track: Track
-
-
-class InMemTrackStorage:
-    def __init__(self):
-        self.mem = {}
-
-    def insert(self, track: Track) -> str:
-        tid = str(uuid.uuid4())
-        self.mem[tid] = track
-
-        return tid
-
-    def get(self, tid: str) -> Track:
-        result = self.mem.get(tid)
-        if result is None:
-            raise ValueError("Requested track not found!")
-
-        return result
-
-
-storage = InMemTrackStorage()
 
 
 @app.route('/api/track', methods=['POST'])

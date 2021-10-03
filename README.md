@@ -13,3 +13,21 @@ Example (server is always available): ```curl --header "Content-Type: applicatio
 Tests:
 
 ```cd FlaskApp && python3 -m pytest```
+
+gql:
+
+```
+{
+   tracks(limit: 2, pattern: "p") {
+     maxParallelPools,
+     minPoolAcceptanceRate,
+     softAlertMultiplier,
+     maxHourlyAppeals,
+     checkIntervalMinutes
+     project {
+       id,
+       publicName
+     }
+   }
+ }
+ ```

@@ -44,7 +44,6 @@ def init_graphql(app):
         tracks = graphene.List(Track, limit=graphene.Int(), pattern=graphene.String())
 
         def resolve_tracks(self, info, limit: int, pattern: str):
-            print(storage.get_all_tracks())
             all_tracks = list(map(lambda track: Track(
                 max_parallel_pools=track.max_parallel_pools,
                 min_pool_acceptance_rate=track.min_pool_acceptance_rate,

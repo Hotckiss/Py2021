@@ -1,16 +1,13 @@
-import uuid
-import graphene
-from starlette.graphql import GraphQLApp
 from argparse import ArgumentParser
-from flask import Flask
-from flask_pydantic import validate
-from pydantic import BaseModel
-import lib.models
-from lib.api import validate_track, register, info
-from lib.models import Track, TrackResponse, TrackInfoResponse
-from lib.storage import storage
-from flask_graphql import GraphQLView
 
+import graphene
+from flask import Flask
+from flask_graphql import GraphQLView
+from flask_pydantic import validate
+
+from lib.api import register, info
+from lib.models import Track
+from lib.storage import storage
 
 app = Flask(__name__)
 
@@ -27,7 +24,7 @@ def track_info(track_id: str):
     return info(track_id)
 
 
-def start_graphql(app):
+def init_graphql(app):
     class Project(graphene.ObjectType):
         id = graphene.String(default_value="id")
         public_name = graphene.String(default_value="Fake Project")
@@ -75,5 +72,5 @@ if __name__ == '__main__':
     parser.add_argument('--port', type=int, default=5000)
     args = parser.parse_args()
 
-    start_graphql(app)
+    init_graphql(app)
     app.run(host=args.host, port=args.port)

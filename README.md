@@ -32,4 +32,11 @@ gql:
  }
  ```
 
+Архитектура:
+
+1) Track Service отвечает на запросы регистрации алера и их хранение
+2) DataLens Service отвечает за трансляцию сырых данных проектов и сообщений в дашборд DataLens
+3) Toloka Project Service предоставляет фасад для работы с проектами Толоки
+4) Toloka Messages Service предоставляет фасад для работы с сообщениями Толоки
+5) Notification Service отвечает за уведомление пользователя о сработавших алертах
 ![Architectire](https://github.com/Hotckiss/Py2021/blob/master/toloka.png)

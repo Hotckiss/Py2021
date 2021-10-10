@@ -31,3 +31,5 @@ gql:
    }
  }
  ```
+
+![Architectire](https://github.com/Hotckiss/Py2021/blob/master/toloka.png)

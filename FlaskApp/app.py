@@ -50,6 +50,7 @@ def init_graphql(app):
                 max_hourly_appeals=track.max_hourly_appeals,
                 check_interval_minutes=track.check_interval_minutes,
                 soft_alert_multiplier=track.soft_alert_multiplier,
+                project=Project()
             ), list(filter(lambda tr: pattern in tr.name, storage.get_all_tracks()))))
 
             return all_tracks[:limit]
